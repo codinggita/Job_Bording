@@ -1,4 +1,4 @@
-export class Job{
+export class Jobs{
     jobName:string;
     companyName:string;
     startPackage:string;
@@ -6,8 +6,8 @@ export class Job{
     jobType:string;
     active:boolean;
     constructor(){
-        this.jobName='';
         this.companyName='';
+        this.jobName='';
         this.startPackage='';
         this.endPackage='';
         this.jobType='';
