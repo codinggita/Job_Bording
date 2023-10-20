@@ -48,16 +48,6 @@ export class JobDescriptionComponent implements OnInit{
         active:true 
       }
     ];
-
-    // this.user={
-    //   name:"krishan",
-    //   tittle:"SDE-2",
-    //   address:"no body knows",
-    //   phone:[
-    //     '21212113',
-    //     '32443232'
-    //   ]
-    // };
   }
 
   ngOnInit(){ }
