@@ -1,27 +1,29 @@
 <div class="container">
     <p class="fw-bold">Showing 2487 jobs based on your filter</p>
 
-    <a href="#" class="row text-decoration-none">
+    <div class="row">
         <div class="col-md-6" *ngFor="let jobVal of job, index as i">
-            <table class="table table-striped table-dark border">
-                <thead>
-                    <tr>
-                        <th>JobName: {{jobVal.jobName}}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Company Name: {{jobVal.companyName}}</td>
-                    </tr>
-                    <tr>
-                        <td>Job Type: {{jobVal.jobType}}</td>
-                    </tr>
-                    <tr>
-                        <td>Package: ${{jobVal.startPackage}} - ${{jobVal.endPackage}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <a href="#" class="text-decoration-none">
+                <table class="table table-striped table-dark border">
+                    <thead>
+                        <tr>
+                            <th>JobName: {{jobVal.jobName}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Company Name: {{jobVal.companyName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Job Type: {{jobVal.jobType}}</td>
+                        </tr>
+                        <tr>
+                            <td>Package: ${{jobVal.startPackage}} - ${{jobVal.endPackage}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </a>
         </div>
-    </a>
+    </div>
 </div>
 
