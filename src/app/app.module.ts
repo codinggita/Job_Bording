@@ -8,6 +8,12 @@ import { JobSearchComponent } from './job-search/job-search.component';
 import { JobDescriptionComponent } from './job-description/job-description.component';
 import { JobProfessionComponent } from './job-profession/job-profession.component';
 
+
+// for using api calls
+import {HttpClientModule} from '@angular/common/http';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +24,8 @@ import { JobProfessionComponent } from './job-profession/job-profession.componen
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
