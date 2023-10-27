@@ -7,6 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { JobSearchComponent } from './job-search/job-search.component';
 import { JobDescriptionComponent } from './job-description/job-description.component';
 import { JobProfessionComponent } from './job-profession/job-profession.component';
+import { FormsModule } from '@angular/forms';
 
 
 // for using api calls
@@ -25,7 +26,8 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
