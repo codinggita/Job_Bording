@@ -128,24 +128,20 @@ export class JobSearchComponent implements OnInit {
   //   // return this.http.get(`https://data.usajobs.gov/api/Search?PositionTitle=Electrical%20Engineer`, { headers });
   // }
 
-  
-  private async fetchDataFromApi1(searchCompany:string){
+  private async fetchDataFromApi1(searchCompany:string,headers:any){
     const apiUrl1=`https://data.usajobs.gov/api/search?Keyword=${searchCompany}`;
-    const headers = {
-      "Host": 'data.usajobs.gov',
-      "User-Agent": 'krish200599@gmail.com',
-      "Authorization-Key": 'PBEynuOsrkra7XmLrV0EDNKHj3iag6ecoQfKmsTHcoc='
-    }
-    return axios.get(apiUrl1,{headers})
+    return axios.get(apiUrl1,{headers});
   }
 
-  private async fetchDataFromApi2(searchJob:string){
+
+  private async fetchDataFromApi2(searchJob:string,headers:any){
     const apiUrl2=``;
-    const headers = {
-      "Host": 'data.usajob.gov',
-      "User-Agent": 'krish200599@gmail.com',
-      "Authorization-Key": 'PBEynuOsrkra7XmLrV0EDNKHj3iag6ecoQfKmsTHcoc='
-    }
+    return axios.get(apiUrl2,{headers});
+  }
+
+  private async fetchDataFromApi3(searchJob:string,headers:any){
+    const apiUrl3=``;
+    return axios.get(apiUrl3,{headers});
   }
   
 
@@ -154,28 +150,42 @@ export class JobSearchComponent implements OnInit {
   searchJob:string|null=null;
   searchLocation:string|null=null;
 
+  readonly headers = {
+    "Host": 'data.usajob.gov',
+    "User-Agent": 'krish200599@gmail.com',
+    "Authorization-Key": 'PBEynuOsrkra7XmLrV0EDNKHj3iag6ecoQfKmsTHcoc='
+  }
+  
   async onSubmit(){
     if(this.searchCompany!=null){
-      // console.log(this.searchCompany);
-      await this.fetchDataFromApi1(this.searchCompany)
+      await this.fetchDataFromApi1(this.searchCompany,this.headers)
       .then(async (response) => {
         this.dataFromApi1 = await response.data.SearchResult.SearchResultItems;
-        console.log(response.data);
+        // console.log(response.data);
       }, (error) => {
-        console.log(error);
+        console.error(error);
       });
       // console.warn(this.fetchDataFromApi1(this.searchCompany));
       // console.log(this.dataFromApi1.SearchResult.SearchResultItems)
-      console.log(this.dataFromApi1)
+      console.log(this.dataFromApi1);
     }
 
-    // if(this.searchJob!=null){
-    //   console.log(this.searchJob);
-    // }
+    if(this.searchJob!=null){
+      console.log(this.searchJob);
 
-    // if(this.searchLocation!=null){
-    //   console.log(this.searchLocation);
-    // }
+      await this.fetchDataFromApi2(this.searchJob,this.headers)
+      .then(async (response) =>{
+        this.dataFromApi2 = await response;
+        console.log(response);
+      },(error) =>{
+        console.error(error);
+      });
+      console.log(this.dataFromApi2);      
+    }
+    
+    if(this.searchLocation!=null){
+      console.log(this.searchLocation);
+    }
   }
 
 }
