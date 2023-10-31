@@ -30,15 +30,16 @@
 
     <form class="row g-2 mt-5" style="margin-left: 20% ;margin-right: 20%;" (ngSubmit)="onSubmit()" >
       <div class="input-group">
-        <span class="input-group-text">Search job by 'company'</span>
-        <label for="companySearchValue" class="visually-hidden">company search value</label>
-        <input type="text" [(ngModel)]="searchCompany" class="form-control" id="companySearchValue" name="companySearchValue" placeholder="Search your desired 'company'">
+        <span class="input-group-text">Search job by 'company/Name/Title'</span>
+        <label for="SearchJob" class="visually-hidden">search job</label>
+        <input type="text" [(ngModel)]="searchCompany" class="form-control" id="SearchJob" name="SearchJob" placeholder="Search your desired 'company'">
       </div>
        
       <div class="input-group">
-          <span class="input-group-text" style="padding-right: 8%;padding-left: 8%;">Search job</span>
-          <label for="jobSearchValue" class="visually-hidden">search Job Value</label>
-          <input type="text" [(ngModel)]="searchJob" class="form-control" id="jobSearchValue" name="jobSearchValue" placeholder="Search your desired 'Job'">
+          <span class="input-group-text" style="padding-right: 8%;padding-left: 8%;">Remuneration Range</span>
+          <label for="payingRange" class="visually-hidden">Remuneration Range</label>
+          <input type="text" [(ngModel)]="minRange" class="form-control" id="payingRange" name="payingRange" placeholder="Remuneration Mini. Amount">
+          <input type="text" [(ngModel)]="maxRange" class="form-control" id="payingRange" name="payingRange" placeholder="Remuneration Maxi. Amount">
       </div>
       
       <div class="input-group">
@@ -51,5 +52,54 @@
         <button type="submit" class="btn btn-primary mb-3">Search jobs</button>
       </div>
   </form>
-    
+  <!-- <ng-container *ngFor="let data of dataFromApi1;">
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        {{data.MatchedObjectDescriptor.DepartmentName}}
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+            {{data.MatchedObjectDescriptor.JobCategory[0].Name}}
+          </div>
+        </div>
+      </div>
+
+  </ng-container> -->
+  
+
+
+  <div class="container">
+    <p class="fw-bold">Showing 2487 jobs based on your filter</p>
+
+    <div class="row">
+        <div class="col-md-6" *ngFor="let jobVal of commonData">
+            <a href="#" class="text-decoration-none">
+                <table class="table table-striped table-dark border">
+                    <thead>
+                        <tr>
+                            <th>JobName: {{jobVal?.MatchedObjectDescriptor?.PositionTitle}}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Company Name: {{jobVal?.MatchedObjectDescriptor?.OrganizationName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Job Type: {{jobVal?.MatchedObjectDescriptor?.JobCategory[0]}}</td>
+                        </tr>
+                        <tr>
+                            <td>Package: ${{jobVal?.MatchedObjectDescriptor?.PositionRemuneration[0].MinimumRange}} - ${{jobVal.MatchedObjectDescriptor.PositionRemuneration[0].MaximumRange}}</td>
+                        </tr>
+                        <tr>
+                            <td>Location: ${{jobVal?.MatchedObjectDescriptor?.PositionLocationDisplay}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
 </div>
