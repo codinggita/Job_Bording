@@ -1,6 +1,5 @@
 import { Component,OnInit } from '@angular/core';
 
-import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders } from '@angular/common/http';
 import axios from 'axios';
 
@@ -12,6 +11,11 @@ import axios from 'axios';
   styleUrls: ['./job-search.component.css']
 })
 export class JobSearchComponent implements OnInit {
+  
+  constructor(private http:HttpClient){ }
+  
+  ngOnInit(){}
+ 
   dataFromApi1:any;
   dataFromApi2:any;
   dataFromApi3:any;
@@ -19,135 +23,10 @@ export class JobSearchComponent implements OnInit {
   dataFromApi5:any;
   dataFromApi6:any;
   dataFromApi7:any;
-
-  constructor(private http:HttpClient){ }
   
-  ngOnInit(){
-    // this.fetchDataFromApi1();
-    // this.fetchDataFromApi2();
-    // this.fetchDataFromApi3();
-    // this.fetchDataFromApi4();
-    // this.fetchDataFromApi5();
-    // this.fetchDataFromApi6();
-    // this.fetchDataFromApi7();
-  }
-
-  // async fetchDataFromApi1(searcgCompany:String){
-  //   const apiUrl1=`https://data.usajobs.gov/api/search?Keyword=${searcgCompany}`;
-  //   const headers = new HttpHeaders()
-  //     .set('Host', 'data.usajobs.gov')
-  //     .set('User-Agent', 'krish200599@gmail.com')
-  //     .set('Authorization-Key', 'PBEynuOsrkra7XmLrV0EDNKHj3iag6ecoQfKmsTHcoc=');
-  //   this.http.get(apiUrl1, {headers}).subscribe(
-  //      (data)=>{
-  //       // return data;
-  //       // console.log('API Response 1',data);
-  //       return data;
-  //       // this.dataFromApi1=data;
-  //     },error=>{
-  //       console.warn('API Error 1:', error);
-  //     }
-  //   );
-  // }
-  // fetchDataFromApi2(){
-  //   const apiUrl2='https://data.usajobs.gov/api/codelist/occupationalseries';
-  //   this.http.get(apiUrl2).subscribe(
-  //     (data)=>{
-  //       console.warn('API Response 2',data);
-  //       this.dataFromApi2=data;
-  //     },error=>{
-  //       console.warn('API Error 2:', error);
-  //     }
-  //   );
-  // }
-  // fetchDataFromApi3(){
-  //   const apiUrl3='https://data.usajobs.gov/api/codelist/payplans';
-  //   this.http.get(apiUrl3).subscribe(
-  //     (data)=>{
-  //       console.warn('API Response 3',data);
-  //       this.dataFromApi3=data;
-  //     },error=>{
-  //       console.warn('API Error 3:', error);
-  //     }
-  //   );
-  // }
-  // fetchDataFromApi4(){
-  //   const apiUrl4='https://data.usajobs.gov/api/codelist/postalcodes';
-  //   this.http.get(apiUrl4).subscribe(
-  //     (data)=>{
-  //       console.warn('API Response 4',data);
-  //       this.dataFromApi4=data;
-  //     },error=>{
-  //       console.warn('API Error 4:', error);
-  //     }
-  //   );
-  // }
-  // fetchDataFromApi5(){
-  //   const apiUrl5='https://data.usajobs.gov/api/codelist/geoloccodes';
-  //   this.http.get(apiUrl5).subscribe(
-  //     (data)=>{
-  //       console.warn('API Response 5',data);
-  //       this.dataFromApi5=data;
-  //     },error=>{
-  //       console.warn('API Error 5:', error);
-  //     }
-  //   );
-  // }
-  // fetchDataFromApi6(){
-  //   const apiUrl6='https://data.usajobs.gov/api/codelist/countries';
-  //   this.http.get(apiUrl6).subscribe(
-  //     (data)=>{
-  //       console.warn('API Response 6',data);
-  //       this.dataFromApi6=data;
-  //     },error=>{
-  //       console.warn('API Error 6:', error);
-  //     }
-  //   );
-  // }
-  // fetchDataFromApi7(){
-  //   const apiUrl7='https://data.usajobs.gov/api/codelist/countrysubdivisions';
-  //   this.http.get(apiUrl7).subscribe(
-  //     (data)=>{
-  //       console.warn('API Response 7',data);
-  //       this.dataFromApi1=data;
-  //     },error=>{
-  //       console.warn('API Error 7:', error);
-  //     }
-  //   );
-  // }
- 
-  // private fetchDataFroymApi1(searchCompany: string) {
-  //   const headers = {
-  //     "Host": 'data.usajobs.gov',
-  //     "User-Agent": 'krish200599@gmail.com',
-  //     "Authorization-Key": 'PBEynuOsrkra7XmLrV0EDNKHj3iag6ecoQfKmsTHcoc='
-  //   }
-  //   return new Promise<any>((resolve) => {
-  //     resolve(this.http.get(`https://data.usajobs.gov/api/Search?PositionTitle=Electrical%20Engineer`, { headers }));
-  //   });
-  //   // return this.http.get(`https://data.usajobs.gov/api/Search?PositionTitle=Electrical%20Engineer`, { headers });
-  // }
-
-  private async fetchDataFromApi1(searchCompany:string,headers:any){
-    const apiUrl1=`https://data.usajobs.gov/api/search?Keyword=${searchCompany}`;
-    return axios.get(apiUrl1,{headers});
-  }
-
-
-  private async fetchDataFromApi2(searchJob:string,headers:any){
-    const apiUrl2=``;
-    return axios.get(apiUrl2,{headers});
-  }
-
-  private async fetchDataFromApi3(searchJob:string,headers:any){
-    const apiUrl3=``;
-    return axios.get(apiUrl3,{headers});
-  }
-  
-
-
   searchCompany:string|null=null;
-  searchJob:string|null=null;
+  minRange:string|null=null;
+  maxRange:string|null=null;
   searchLocation:string|null=null;
 
   readonly headers = {
@@ -155,37 +34,79 @@ export class JobSearchComponent implements OnInit {
     "User-Agent": 'krish200599@gmail.com',
     "Authorization-Key": 'PBEynuOsrkra7XmLrV0EDNKHj3iag6ecoQfKmsTHcoc='
   }
+
+  private async fetchDataFromApi(headers:any ,apiUrl:string){
+    return axios.get(apiUrl ,{headers});
+  }
   
-  async onSubmit(){
-    if(this.searchCompany!=null){
-      await this.fetchDataFromApi1(this.searchCompany,this.headers)
-      .then(async (response) => {
-        this.dataFromApi1 = await response.data.SearchResult.SearchResultItems;
-        // console.log(response.data);
-      }, (error) => {
-        console.error(error);
-      });
-      // console.warn(this.fetchDataFromApi1(this.searchCompany));
-      // console.log(this.dataFromApi1.SearchResult.SearchResultItems)
-      console.log(this.dataFromApi1);
-    }
-
-    if(this.searchJob!=null){
-      console.log(this.searchJob);
-
-      await this.fetchDataFromApi2(this.searchJob,this.headers)
-      .then(async (response) =>{
-        this.dataFromApi2 = await response;
-        console.log(response);
-      },(error) =>{
-        console.error(error);
-      });
-      console.log(this.dataFromApi2);      
-    }
-    
-    if(this.searchLocation!=null){
-      console.log(this.searchLocation);
-    }
+  async getData(headers :any ,apiUrl:string ){
+    return await this.fetchDataFromApi(headers ,apiUrl)
+    .then(async (response) => {
+      // dataFromApi = await response.data.SearchResult.SearchResultItems;
+      return response;
+    }, (error) => {
+      console.error(error);
+    });
   }
 
+
+
+  commonData:any;
+  
+  async onSubmit(){
+
+    this.commonData = null;
+
+    if (this.searchCompany != null) {
+      console.log(this.searchCompany);
+    
+      const apiUrl1 = `https://data.usajobs.gov/api/search?Keyword=${this.searchCompany}`;
+      const Api2Data = this.searchCompany.replace(/ /g, "%20");
+      const apiUrl2 = `https://data.usajobs.gov/api/Search?PositionTitle=${Api2Data}`;
+    
+      // Fetch data from the 1 API
+      this.dataFromApi1 = await this.getData(this.headers, apiUrl1);
+      this.dataFromApi1 = this.dataFromApi1.data.SearchResult.SearchResultItems;
+
+      // Fetch data from the 2 API
+      this.dataFromApi2 = await this.getData(this.headers, apiUrl2);
+      this.dataFromApi2 = this.dataFromApi2.data.SearchResult.SearchResultItems;
+
+      // console.log("Data from API 1:", this.dataFromApi1);
+      // console.log("Data from API 2:", this.dataFromApi2);
+    
+      // Combine or manipulate the data as needed
+      this.commonData = [...this.dataFromApi1, ...this.dataFromApi2];
+    }
+
+    // console.warn("common Data",this.commonData);
+    
+    if(this.minRange!=null || this.maxRange!=null){ 
+      if(this.minRange==null && this.maxRange){
+        for(let i = 0 ; i < this.commonData.length ; i++){
+          if(this.commonData[i].MatchedObjectDescriptor.PositionRemuneration[0].MaximumRange <= this.maxRange){
+            delete this.commonData[i];
+          }
+        }
+      }else if(this.maxRange==null){
+    
+      }else{
+    
+      }
+    }
+
+    if(this.searchLocation!=null){
+    
+
+    }
+
+    // to remove empty slots from the commonData
+    const removeEmptySlots = (data:any) => data.filter((element:any) => element !== undefined && element !== null);
+    
+    this.commonData = removeEmptySlots(this.commonData);
+
+    // Output the combined datax
+    console.warn("Common Data:", this.commonData);
+
+  }
 }
